@@ -1,0 +1,15 @@
+name: 'deploy'
+description: 'Deploy Slash Commands'
+inputs:
+  client-id:
+    description: 'client id of the bot to deploy to'
+    required: true
+  token:
+    description: 'bot token for bot'
+    required: true
+outputs:
+  response:
+    description: 'response from discord api'
+runs:
+  using: 'node16'
+  main: 'dist/index.js'

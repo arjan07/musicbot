@@ -1,0 +1,22 @@
+name: Slash Command Deployment
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy_slash_commands:
+    runs-on: ubuntu-latest
+    name: Deploy Slash Commands
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Deploy
+        uses: ./slash-commands/build/
+        id: deploy
+        with:
+          client-id: ${{ secrets.CLIENTID }}
+          token: ${{ secrets.TOKEN }}
+      - name: Output
+        run: echo "The output was ${{ steps.deploy.outputs.response }}"

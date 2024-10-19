@@ -1,0 +1,53 @@
+{
+  "name": "musicbot",
+  "version": "1.0.0",
+  "description": "A modern and simple local file music app/bot for Discord",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc --project .",
+    "watch": "tsc -w",
+    "run": "npm run build && node .",
+    "start": "node .",
+    "lint": "eslint ./src --ext .ts",
+    "format": "prettier --write \"./**/*.ts\""
+  },
+  "type": "module",
+  "engines": {
+    "node": "20.17.0"
+  },
+  "keywords": [
+    "discord",
+    "bot",
+    "app",
+    "music"
+  ],
+  "bugs": {
+    "url": "https://github.com/arjan07/musicbot/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arjan07/musicbot.git"
+  },
+  "homepage": "https://github.com/arjan07/musicbot#readme",
+  "author": "arjan07",
+  "license": "GNU GPLv3",
+  "dependencies": {
+    "@discordjs/opus": "^0.9.0",
+    "@discordjs/voice": "^0.17.0",
+    "discord-api-types": "^0.37.102",
+    "discord.js": "^14.16.2",
+    "mysql2": "^3.11.2",
+    "sodium": "^3.0.2",
+    "winston": "^3.14.2"
+  },
+  "devDependencies": {
+    "@types/node": "^20.16.2",
+    "@typescript-eslint/eslint-plugin": "^7.17.0",
+    "@typescript-eslint/parser": "^7.17.0",
+    "eslint": "^8.57.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.2.1",
+    "prettier": "^3.3.3",
+    "typescript": "^5.4.5"
+  }
+}
