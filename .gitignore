@@ -1,1 +1,5 @@
 /dist/
+/node_modules/
+/music-servers.json
+/log
+/slash-commands/build/node_modules/
