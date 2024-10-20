@@ -51,6 +51,7 @@
           "type": 3,
           "description": "The name of the song to remove from the queue",
           "required": true,
+          "autocomplete": true,
           "min_length": 1,
           "max_length": 220
         }
