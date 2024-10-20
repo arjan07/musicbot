@@ -50,7 +50,7 @@ export default class TrustedRoleSet extends Command {
             );
             return interaction.editReply({
                 embeds: [
-                    EmbedFormatter.standardErrorEmbed().setDescription(
+                    EmbedFormatter.standardSuccessEmbed().setDescription(
                         `The trusted role has been updated to ${role.name} (${role}).`,
                     ),
                 ],
@@ -64,7 +64,7 @@ export default class TrustedRoleSet extends Command {
 
         return interaction.editReply({
             embeds: [
-                EmbedFormatter.standardErrorEmbed().setDescription(
+                EmbedFormatter.standardSuccessEmbed().setDescription(
                     `The trusted role has been set to ${role.name} (${role}).`,
                 ),
             ],
