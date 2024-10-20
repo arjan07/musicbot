@@ -4,7 +4,7 @@ tested, I cannot guarantee stability. However, in almost all cases, the bot shou
 self-hosted.
 
 ### System Requirements
-- Node.js Version 20.17.0
+- Node.js Version 20.18.0
 - MySQL Version 8
 - ffmpeg
 - libtool
