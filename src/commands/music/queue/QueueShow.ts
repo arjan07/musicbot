@@ -37,13 +37,13 @@ export default class QueueShow extends Command {
         if (alreadyQueued) queue.shift();
 
         const queuedSongs = queue.map(
-            (song) => `1\\. ${song.OfficialName} - ${song.ArtistName}`,
+            (song, i) => `${i + 1}. ${song.OfficialName} - ${song.ArtistName}\n`,
         );
 
         const description =
             queuedSongs.length === 0
                 ? 'There is nothing else queued at the moment.'
-                : 'Queued for play:\n';
+                : 'Queued For Play:\n';
 
         const embedArray = Paginator.createEmbeds(
             queue.length === 0 ? [] : [description, ...queuedSongs],
