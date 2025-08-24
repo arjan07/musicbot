@@ -1,8 +1,6 @@
 import {
     ActionRowBuilder,
     ButtonBuilder,
-    EmbedBuilder,
-    Colors,
     ButtonStyle,
     ComponentType,
     escapeNumberedList,
@@ -10,29 +8,30 @@ import {
     Message,
     ColorResolvable,
     ButtonInteraction,
-    InteractionReplyOptions,
+    InteractionEditReplyOptions,
 } from 'discord.js';
 import LoggerTool from './LoggerTool.js';
+import EmbedFormatter from './EmbedFormatter.js';
 
 const noEmbedsString =
     'There is not enough information for this command to work right now. Try again later.';
 
 export default class Paginator {
     private interaction: ChatInputCommandInteraction;
-    private readonly embedArray: EmbedBuilder[];
+    private readonly embedArray: EmbedFormatter[];
     private readonly deletable: boolean;
-    private noEmbedErrorString: string;
+    private readonly noEmbedErrorString: string;
 
     /**
      * Creates an interaction based embed paginator that allows users to see more data in a concise format
      * @param interaction An instance of ChatInputInteraction
-     * @param embedArray An array of EmbedBuilder that will be used to build the pagination
+     * @param embedArray An array of EmbedFormatter that will be used to build the pagination
      * @param deletable Whether the paginated response should be user deletable
      * @param noEmbedErrorString Custom description that will be sent whenever the embedArray is empty
      */
     constructor(
         interaction: ChatInputCommandInteraction,
-        embedArray: EmbedBuilder[],
+        embedArray: EmbedFormatter[],
         deletable = true,
         noEmbedErrorString = noEmbedsString,
     ) {
@@ -63,40 +62,38 @@ export default class Paginator {
             .setStyle(ButtonStyle.Danger);
     }
 
-    private createPayload() {
-        return (
-            this.embedArray.length === 1
-                ? this.deletable
-                    ? {
-                          embeds: [this.embedArray[0]],
-                          components: [
-                              new ActionRowBuilder().addComponents(
-                                  this.deleteButton(),
-                              ),
-                          ],
-                      }
-                    : { embeds: [this.embedArray[0]] }
-                : this.deletable
-                  ? {
-                        embeds: [this.embedArray[0]],
-                        components: [
-                            new ActionRowBuilder().addComponents(
-                                this.previousButton(),
-                                this.nextButton(),
-                                this.deleteButton(),
-                            ),
-                        ],
-                    }
-                  : {
-                        embeds: [this.embedArray[0]],
-                        components: [
-                            new ActionRowBuilder().addComponents(
-                                this.previousButton(),
-                                this.nextButton(),
-                            ),
-                        ],
-                    }
-        ) as InteractionReplyOptions;
+    private createPayload(): InteractionEditReplyOptions {
+        return this.embedArray.length === 1
+            ? this.deletable
+                ? {
+                      embeds: [this.embedArray[0]],
+                      components: [
+                          new ActionRowBuilder<ButtonBuilder>().addComponents(
+                              this.deleteButton(),
+                          ),
+                      ],
+                  }
+                : { embeds: [this.embedArray[0]] }
+            : this.deletable
+              ? {
+                    embeds: [this.embedArray[0]],
+                    components: [
+                        new ActionRowBuilder<ButtonBuilder>().addComponents(
+                            this.previousButton(),
+                            this.nextButton(),
+                            this.deleteButton(),
+                        ),
+                    ],
+                }
+              : {
+                    embeds: [this.embedArray[0]],
+                    components: [
+                        new ActionRowBuilder<ButtonBuilder>().addComponents(
+                            this.previousButton(),
+                            this.nextButton(),
+                        ),
+                    ],
+                };
     }
 
     private handler(message: Message) {
@@ -145,9 +142,9 @@ export default class Paginator {
         if (this.embedArray.length === 0) {
             return this.interaction.editReply({
                 embeds: [
-                    new EmbedBuilder()
-                        .setDescription(this.noEmbedErrorString)
-                        .setColor(Colors.Red),
+                    EmbedFormatter.standardErrorEmbed().setDescription(
+                        this.noEmbedErrorString,
+                    ),
                 ],
             });
         }
@@ -167,7 +164,7 @@ export default class Paginator {
      * @param thumbnail The image url that will be displayed in the embed thumbnail
      * @param url The url to add to the embed title
      * @param chunk How many rows from the data that should be displayed on one embed
-     * @returns {EmbedBuilder[]}
+     * @returns {EmbedFormatter[]}
      */
     public static createEmbeds(
         data: string[],
@@ -178,8 +175,8 @@ export default class Paginator {
         thumbnail = null,
         url = null,
         chunk = 10,
-    ): EmbedBuilder[] {
-        const embeds: EmbedBuilder[] = [];
+    ): EmbedFormatter[] {
+        const embeds: EmbedFormatter[] = [];
         const results: string[][] = data.reduce(
             (all: string[][], one: string, i: number): string[][] => {
                 const ch = Math.floor(i / chunk);
@@ -191,7 +188,7 @@ export default class Paginator {
 
         results.forEach((result, i) => {
             embeds.push(
-                new EmbedBuilder()
+                EmbedFormatter.plainEmbed(color)
                     .setTitle(embedTitle)
                     .setAuthor(author)
                     .setDescription(escapeNumberedList(result.join('')))
@@ -199,8 +196,7 @@ export default class Paginator {
                     .setURL(url)
                     .setFooter({
                         text: `Page ${i + 1}/${results.length} ${footer ? footer : ''}`.trim(),
-                    })
-                    .setColor(color),
+                    }),
             );
         });
 
