@@ -1,6 +1,6 @@
 {
   "name": "musicbot",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A modern and simple local file music app/bot for Discord",
   "main": "dist/index.js",
   "scripts": {
