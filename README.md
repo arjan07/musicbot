@@ -4,8 +4,8 @@ tested, I cannot guarantee stability. However, in almost all cases, the bot shou
 self-hosted.
 
 ### System Requirements
-- Node.js Version 20.18.0
-- MySQL Version 8
+- Node.js Version 22.18.0
+- MySQL Version 9
 - ffmpeg
 - libtool
 - automake
@@ -56,4 +56,4 @@ Consult the `README.md` file in the `slash-commands/build` directory for more in
 
 
 - **Q:** "My question is not answered here."
-- **A:** Open an [issue](https://github.com/arjan07/musicbot/issues), and i'll try get back to you as soon as possible!
+- **A:** Open an [issue](https://github.com/arjan07/musicbot/issues), and I'll try to get back to you as soon as possible!
