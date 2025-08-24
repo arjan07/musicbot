@@ -6,6 +6,7 @@ import {
     Collection,
     Events as DiscordEvents,
     InteractionType,
+    MessageFlags,
     Snowflake,
 } from 'discord.js';
 import Handler, { HandlerOptions, LoadPredicate } from '../Handler.js';
@@ -114,8 +115,10 @@ export default class CommandHandler extends Handler {
 
         if (commandModule.deferReply) {
             await interaction.deferReply({
-                ephemeral: commandModule.ephemeral,
-                fetchReply: true,
+                withResponse: true,
+                ...(commandModule.ephemeral
+                    ? { flags: [MessageFlags.Ephemeral] }
+                    : {}),
             });
         }
 

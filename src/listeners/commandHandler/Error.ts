@@ -1,5 +1,5 @@
 import Listener from '../../structure/listeners/Listener.js';
-import { ChatInputCommandInteraction } from 'discord.js';
+import { ChatInputCommandInteraction, MessageFlags } from 'discord.js';
 import Command from '../../structure/commands/Command.js';
 import LoggerTool from '../../modules/tool/LoggerTool.js';
 import EmbedFormatter from '../../modules/tool/EmbedFormatter.js';
@@ -30,6 +30,9 @@ export default class Error extends Listener {
 
         return repliedOrDeferred
             ? interaction.editReply({ embeds: [embed] })
-            : interaction.reply({ embeds: [embed], ephemeral: true });
+            : interaction.reply({
+                  embeds: [embed],
+                  flags: [MessageFlags.Ephemeral],
+              });
     }
 }

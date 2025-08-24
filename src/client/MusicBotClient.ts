@@ -49,7 +49,7 @@ export default class MusicBotClient extends Client {
             intents: [
                 GatewayIntentBits.Guilds,
                 GatewayIntentBits.GuildMembers,
-                GatewayIntentBits.GuildEmojisAndStickers,
+                GatewayIntentBits.GuildExpressions,
                 GatewayIntentBits.GuildVoiceStates,
             ],
             partials: [Partials.User, Partials.Channel, Partials.GuildMember],
