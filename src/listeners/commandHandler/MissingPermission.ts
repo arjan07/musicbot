@@ -1,7 +1,8 @@
 import Listener from '../../structure/listeners/Listener.js';
-import { EmbedBuilder, Colors, ChatInputCommandInteraction } from 'discord.js';
+import { ChatInputCommandInteraction } from 'discord.js';
 import Utilities from '../../modules/tool/Utilities.js';
 import Command from '../../structure/commands/Command.js';
+import EmbedFormatter from '../../modules/tool/EmbedFormatter.js';
 
 export default class MissingPermission extends Listener {
     constructor() {
@@ -18,7 +19,7 @@ export default class MissingPermission extends Listener {
         type: string,
         missing: any,
     ) {
-        const embed = new EmbedBuilder().setColor(Colors.Red);
+        const embed = EmbedFormatter.standardErrorEmbed();
 
         const getChannel = () => {
             if (!interaction.inGuild()) return;

@@ -13,7 +13,7 @@
   },
   "type": "module",
   "engines": {
-    "node": "20.18.0"
+    "node": "22.18.0"
   },
   "keywords": [
     "discord",
@@ -32,22 +32,25 @@
   "author": "arjan07",
   "license": "GNU GPLv3",
   "dependencies": {
-    "@discordjs/opus": "^0.9.0",
-    "@discordjs/voice": "^0.17.0",
-    "discord-api-types": "^0.37.102",
-    "discord.js": "^14.16.2",
-    "mysql2": "^3.11.2",
+    "@discordjs/opus": "^0.10.0",
+    "@discordjs/voice": "^0.19.0",
+    "discord-api-types": "^0.38.21",
+    "discord.js": "^14.22.1",
+    "mysql2": "^3.14.3",
     "sodium": "^3.0.2",
-    "winston": "^3.14.2"
+    "winston": "^3.17.0"
   },
   "devDependencies": {
-    "@types/node": "^20.16.2",
+    "@types/node": "^22.17.2",
     "@typescript-eslint/eslint-plugin": "^7.17.0",
     "@typescript-eslint/parser": "^7.17.0",
     "eslint": "^8.57.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.2.1",
     "prettier": "^3.3.3",
-    "typescript": "^5.4.5"
+    "typescript": "^5.9.2"
+  },
+  "peerDependencies": {
+    "@snazzah/davey": "^0.1.6"
   }
 }

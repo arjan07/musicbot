@@ -7,6 +7,10 @@ inputs:
   token:
     description: 'bot token for bot'
     required: true
+  dry-run:
+    description: 'If true, skip actual deploy'
+    required: false
+    default: 'false'
 outputs:
   response:
     description: 'response from discord api'

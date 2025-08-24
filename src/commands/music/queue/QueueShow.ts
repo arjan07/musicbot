@@ -37,7 +37,8 @@ export default class QueueShow extends Command {
         if (alreadyQueued) queue.shift();
 
         const queuedSongs = queue.map(
-            (song, i) => `${i + 1}. ${song.OfficialName} - ${song.ArtistName}\n`,
+            (song, i) =>
+                `${i + 1}. ${song.OfficialName} - ${song.ArtistName}\n`,
         );
 
         const description =

@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
   deploy_slash_commands:
@@ -18,5 +21,6 @@ jobs:
         with:
           client-id: ${{ secrets.CLIENTID }}
           token: ${{ secrets.TOKEN }}
+          dry-run: ${{ github.event_name == 'pull_request' }}
       - name: Output
         run: echo "The output was ${{ steps.deploy.outputs.response }}"
